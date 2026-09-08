@@ -1,0 +1,406 @@
+/* ==========================================================================
+   SPORT BAR — Rooftop Terrace
+   Sistema de diseño compartido (v2 — cálido, amigable, con personalidad)
+   ========================================================================== */
+
+:root {
+  --cream: #F7F1E2;
+  --cream-soft: #EFE6D2;
+  --ink: #2B2418;
+  --ink-soft: #6B5F49;
+
+  --pitch: #1F4D3A;
+  --pitch-deep: #163526;
+  --gold: #E3A857;
+  --gold-deep: #C68A38;
+
+  --peach: #F0C27E;
+  --peach-ink: #6B4419;
+  --brick: #A8532B;
+  --brick-ink: #FBEADD;
+  --wine: #6B2A3A;
+  --wine-ink: #F7E3E3;
+
+  --line-soft: #E1D5B8;
+
+  --font-display: "Big Shoulders Display", sans-serif;
+  --font-body: "Public Sans", sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
+
+/* --------------------------------------------------------------------------
+   Page shell
+   -------------------------------------------------------------------------- */
+
+.shell {
+  max-width: 640px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  padding: 0 24px;
+}
+
+/* --------------------------------------------------------------------------
+   Hero band — logo + nombre, cálido, primer plano
+   -------------------------------------------------------------------------- */
+
+.hero-band {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(160deg, var(--pitch) 0%, var(--pitch-deep) 62%, var(--gold-deep) 130%);
+  padding: 52px 24px 46px;
+  text-align: center;
+}
+
+.hero-band::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(247, 241, 226, 0.08) 1.4px, transparent 1.4px);
+  background-size: 16px 16px;
+  opacity: 0.6;
+}
+
+.hero-band__inner { position: relative; }
+
+.badge {
+  width: 104px;
+  height: 104px;
+  margin: 0 auto 18px;
+  border-radius: 50%;
+  background: var(--cream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 24px rgba(22, 53, 38, 0.35);
+}
+
+.badge svg {
+  width: 62px;
+  height: 62px;
+  stroke: var(--pitch);
+  fill: none;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.badge svg .sun { fill: var(--gold-deep); stroke: none; }
+
+.hero-band__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(42px, 11vw, 58px);
+  line-height: 0.95;
+  letter-spacing: 0.5px;
+  margin: 0;
+  color: var(--cream);
+}
+
+.hero-band__subtitle {
+  font-size: 13.5px;
+  letter-spacing: 3px;
+  color: var(--gold);
+  margin: 10px 0 0;
+  font-weight: 600;
+}
+
+.hero-band__tagline {
+  max-width: 34ch;
+  margin: 16px auto 0;
+  color: rgba(247, 241, 226, 0.82);
+  font-size: 15px;
+}
+
+/* --------------------------------------------------------------------------
+   Selector heading
+   -------------------------------------------------------------------------- */
+
+.selector-heading { text-align: center; padding: 34px 0 6px; }
+
+.selector-heading__title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 24px;
+  margin: 0;
+  color: var(--ink);
+}
+
+.selector-heading__hint {
+  margin: 6px 0 0;
+  font-size: 13.5px;
+  color: var(--ink-soft);
+}
+
+/* --------------------------------------------------------------------------
+   Selector — paneles de color, uno por categoría
+   -------------------------------------------------------------------------- */
+
+.selector {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 18px 0 8px;
+}
+
+.panel {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 22px 22px;
+  text-decoration: none;
+  border-radius: 26px 26px 26px 8px;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.panel:nth-child(2) { border-radius: 8px 26px 26px 26px; }
+.panel:nth-child(3) { border-radius: 26px 8px 26px 26px; }
+
+.panel:hover, .panel:focus-visible { transform: translateY(-2px); }
+
+.panel:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+.panel--peach { background: var(--peach); color: var(--peach-ink); box-shadow: 0 10px 22px rgba(107, 68, 25, 0.18); }
+.panel--brick { background: var(--brick); color: var(--brick-ink); box-shadow: 0 10px 22px rgba(90, 40, 18, 0.28); }
+.panel--wine  { background: var(--wine);  color: var(--wine-ink);  box-shadow: 0 10px 22px rgba(60, 15, 25, 0.3); }
+
+.panel__icon {
+  flex: 0 0 auto;
+  width: 42px;
+  height: 42px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.92;
+}
+
+.panel__icon .sun { fill: currentColor; stroke: none; }
+
+.panel__text { flex: 1; min-width: 0; }
+
+.panel__label {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 25px;
+  letter-spacing: 0.2px;
+  margin: 0;
+  line-height: 1.1;
+}
+
+.panel__desc { margin: 4px 0 0; font-size: 13.5px; opacity: 0.85; }
+
+.panel__arrow {
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  transition: transform 0.2s ease;
+}
+
+.panel:hover .panel__arrow, .panel:focus-visible .panel__arrow { transform: translateX(4px); }
+
+/* --------------------------------------------------------------------------
+   Info row (horarios)
+   -------------------------------------------------------------------------- */
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 30px;
+  padding: 18px 20px;
+  background: var(--cream-soft);
+  border-radius: 18px;
+  flex-wrap: wrap;
+}
+
+.info-row__item { text-align: left; }
+
+.info-row__label {
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  color: var(--gold-deep);
+  font-weight: 700;
+  margin: 0 0 4px;
+}
+
+.info-row__value { font-size: 13.5px; color: var(--ink); margin: 0; font-weight: 600; }
+
+/* --------------------------------------------------------------------------
+   Footer
+   -------------------------------------------------------------------------- */
+
+.footer { margin-top: auto; padding: 40px 24px 32px; text-align: center; }
+.footer__line { height: 1px; background: var(--line-soft); margin-bottom: 18px; }
+.footer__text { font-size: 12px; color: var(--ink-soft); letter-spacing: 0.5px; margin: 0; }
+
+/* --------------------------------------------------------------------------
+   Menu pages
+   -------------------------------------------------------------------------- */
+
+.menu-topbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 24px 18px;
+  color: var(--cream);
+}
+
+.menu-topbar--peach { background: linear-gradient(135deg, var(--peach) 0%, var(--gold-deep) 130%); color: var(--peach-ink); }
+.menu-topbar--brick { background: linear-gradient(135deg, var(--brick) 0%, var(--wine) 140%); color: var(--brick-ink); }
+.menu-topbar--wine  { background: linear-gradient(135deg, var(--wine) 0%, var(--pitch-deep) 140%); color: var(--wine-ink); }
+
+.menu-topbar__badge {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+}
+
+.menu-topbar__badge svg { width: 26px; height: 26px; stroke: var(--pitch); fill: none; stroke-width: 1.8; }
+
+.menu-topbar__text { flex: 1; }
+
+.menu-topbar__eyebrow { font-size: 11.5px; letter-spacing: 2px; font-weight: 700; margin: 0; opacity: 0.85; }
+
+.menu-topbar__title { font-family: var(--font-display); font-size: 28px; font-weight: 700; margin: 2px 0 0; }
+
+.menu-section { margin-top: 34px; padding: 0 24px; }
+
+.menu-section__title { font-family: var(--font-display); font-size: 19px; font-weight: 600; color: var(--pitch); margin: 0 0 2px; }
+
+.menu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  padding: 15px 0;
+  border-top: 1px solid var(--line-soft);
+}
+
+.menu-section .menu-item:last-child { border-bottom: 1px solid var(--line-soft); }
+
+.menu-item__name { font-weight: 600; font-size: 16px; }
+
+.menu-item__desc { font-size: 13px; color: var(--ink-soft); margin-top: 3px; font-weight: 400; }
+
+.menu-item__price { flex: 0 0 auto; font-family: var(--font-display); font-weight: 700; font-size: 17px; color: var(--gold-deep); white-space: nowrap; }
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 34px 24px 0;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--pitch);
+}
+
+.back-link svg { width: 14px; height: 14px; stroke: var(--pitch); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ==========================================================================
+   Botón flotante de WhatsApp — visible en todas las páginas
+   ========================================================================== */
+
+.wa-float {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 999;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: #25D366;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow: 0 8px 20px rgba(18, 60, 40, 0.32);
+  animation: wa-float-bounce 2.6s ease-in-out infinite;
+}
+
+.wa-float:hover,
+.wa-float:focus-visible {
+  animation-play-state: paused;
+  transform: translateY(-4px);
+}
+
+.wa-float svg {
+  width: 32px;
+  height: 32px;
+  fill: #FFFFFF;
+}
+
+/* anillo de pulso, para que llame la atención sin ser invasivo */
+.wa-float::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #25D366;
+  opacity: 0.55;
+  animation: wa-pulse 2.6s ease-out infinite;
+  z-index: -1;
+}
+
+@keyframes wa-float-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes wa-pulse {
+  0%   { transform: scale(1);   opacity: 0.45; }
+  70%  { transform: scale(1.55); opacity: 0; }
+  100% { transform: scale(1.55); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wa-float,
+  .wa-float::before {
+    animation: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .wa-float {
+    right: 16px;
+    bottom: 16px;
+    width: 56px;
+    height: 56px;
+  }
+  .wa-float svg {
+    width: 28px;
+    height: 28px;
+  }
+}
