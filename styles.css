@@ -338,51 +338,67 @@ a { color: inherit; }
   right: 22px;
   bottom: 22px;
   z-index: 999;
-  width: 62px;
-  height: 62px;
-  border-radius: 50%;
-  background: #25D366;
+  width: 60px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  box-shadow: 0 8px 20px rgba(18, 60, 40, 0.32);
-  animation: wa-float-bounce 2.6s ease-in-out infinite;
+  animation: wa-float-bounce 3.2s ease-in-out infinite;
 }
 
-.wa-float:hover,
-.wa-float:focus-visible {
-  animation-play-state: paused;
-  transform: translateY(-4px);
+/* círculo sólido de fondo, en su propia capa para que el anillo de pulso
+   pueda quedar visible debajo del ícono pero encima del fondo de la página */
+.wa-float::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #25D366;
+  box-shadow: 0 6px 16px rgba(18, 60, 40, 0.35);
+  z-index: 1;
 }
 
-.wa-float svg {
-  width: 32px;
-  height: 32px;
-  fill: #FFFFFF;
-}
-
-/* anillo de pulso, para que llame la atención sin ser invasivo */
+/* anillo de pulso, detrás del círculo sólido, encima del fondo de la página */
 .wa-float::before {
   content: "";
   position: absolute;
   inset: 0;
   border-radius: 50%;
   background: #25D366;
-  opacity: 0.55;
-  animation: wa-pulse 2.6s ease-out infinite;
-  z-index: -1;
+  opacity: 0.5;
+  animation: wa-pulse 3.2s ease-out infinite;
+  z-index: 0;
+}
+
+.wa-float:hover,
+.wa-float:focus-visible {
+  animation-play-state: paused;
+  transform: translateY(-3px);
+}
+
+.wa-float:hover::after,
+.wa-float:focus-visible::after {
+  box-shadow: 0 8px 18px rgba(18, 60, 40, 0.42);
+}
+
+.wa-float svg {
+  position: relative;
+  z-index: 2;
+  width: 30px;
+  height: 30px;
+  fill: #FFFFFF;
 }
 
 @keyframes wa-float-bounce {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  50% { transform: translateY(-6px); }
 }
 
 @keyframes wa-pulse {
-  0%   { transform: scale(1);   opacity: 0.45; }
-  70%  { transform: scale(1.55); opacity: 0; }
-  100% { transform: scale(1.55); opacity: 0; }
+  0%   { transform: scale(1);    opacity: 0.42; }
+  70%  { transform: scale(1.5);  opacity: 0; }
+  100% { transform: scale(1.5);  opacity: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -396,12 +412,12 @@ a { color: inherit; }
   .wa-float {
     right: 16px;
     bottom: 16px;
-    width: 56px;
-    height: 56px;
+    width: 54px;
+    height: 54px;
   }
   .wa-float svg {
-    width: 28px;
-    height: 28px;
+    width: 26px;
+    height: 26px;
   }
 }
 
